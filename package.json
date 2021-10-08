@@ -1,7 +1,7 @@
 {
   "name": "conventional-release-labels",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "automatically apply release labels to PR, based on conventionalcommits.org",
   "main": "index.mjs",
   "scripts": {
