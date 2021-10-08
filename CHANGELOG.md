@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/bcoe/conventional-release-labels/compare/v1.0.0...v1.0.1) (2021-10-08)
+
+
+### Bug Fixes
+
+* **build:** use node12 for action ([f8ecf11](https://www.github.com/bcoe/conventional-release-labels/commit/f8ecf11dcd7a4d0ad9b88db06b0f9ba9149d0569))
+
 ## 1.0.0 (2021-10-08)
 
 
