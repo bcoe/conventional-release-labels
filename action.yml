@@ -6,6 +6,10 @@ inputs:
     description: 'GitHub token for applying labels, defaults to using secrets.GITHUB_TOKEN'
     required: false
     default: ${{ github.token }}
+  feature_label:
+    description: 'label applied to feature pull requests'
+    required: false
+    default: feature
 
 runs:
   using: 'node14'
