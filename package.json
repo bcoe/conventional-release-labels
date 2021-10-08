@@ -3,12 +3,12 @@
   "private": true,
   "version": "1.0.3",
   "description": "automatically apply release labels to PR, based on conventionalcommits.org",
-  "main": "index.mjs",
+  "main": "index.js",
   "scripts": {
-    "test": "c8 mocha test/*.mjs",
+    "test": "c8 mocha test/*.js",
     "posttest": "standard",
     "fix": "standard --fix",
-    "build": "ncc build index.mjs"
+    "build": "ncc build index.js"
   },
   "repository": {
     "type": "git",
