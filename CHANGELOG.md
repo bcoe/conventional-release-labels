@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/bcoe/conventional-release-labels/compare/v1.0.2...v1.0.3) (2021-10-08)
+
+
+### Bug Fixes
+
+* **build:** run index.mjs ([6360654](https://www.github.com/bcoe/conventional-release-labels/commit/636065482438179bda7b4c102f6fc6f24e26c5a0))
+
 ### [1.0.2](https://www.github.com/bcoe/conventional-release-labels/compare/v1.0.1...v1.0.2) (2021-10-08)
 
 
