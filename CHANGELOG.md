@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0 (2021-10-08)
+
+
+### Features
+
+* stub out initial implementation ([553163e](https://www.github.com/bcoe/conventional-release-labels/commit/553163ec3b68da6b9e11bdf87e2a64124e0cc8e3))
+
 ## [2.32.0](https://www.github.com/google-github-actions/release-please-action/compare/v2.31.0...v2.32.0) (2021-09-13)
 
 
