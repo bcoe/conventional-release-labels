@@ -54,7 +54,6 @@ jobs:
         labels: automated pr
         branch: create-pull-request/build-dist
         delete-branch: true
-        push-to-fork: google-github-actions-bot/${{env.ACTION_NAME}}
   release-please-pr:
     runs-on: ubuntu-latest
     needs: [build]
