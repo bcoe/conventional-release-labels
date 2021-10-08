@@ -1,5 +1,90 @@
-import { createRequire as __WEBPACK_EXTERNAL_createRequire } from "module";
-/******/ var __webpack_modules__ = ({
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ 2932:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const core = __nccwpck_require__(2186)
+const github = __nccwpck_require__(5438)
+const fs = __nccwpck_require__(5747)
+const { readFile } = fs.promises
+const { parser } = __nccwpck_require__(4523)
+
+const api = module.exports = {
+  addLabel,
+  isPullRequest,
+  main
+}
+
+async function main () {
+  const { visit } = await __nccwpck_require__.e(/* import() */ 946).then(__nccwpck_require__.bind(__nccwpck_require__, 7946))
+  if (!process.env.GITHUB_EVENT_PATH) {
+    console.warn('no event payload found')
+    return
+  }
+  const payload = JSON.parse(
+    await readFile(process.env.GITHUB_EVENT_PATH, 'utf8')
+  )
+  if (!api.isPullRequest(payload)) {
+    console.info('skipping non pull_request')
+  }
+  const titleAst = parser(payload.pull_request.title)
+  const cc = {
+    breaking: false
+  }
+  // <type>, "(", <scope>, ")", ["!"], ":", <whitespace>*, <text>
+  visit(titleAst, (node) => {
+    switch (node.type) {
+      case 'type':
+        cc.type = node.value
+        break
+      case 'scope':
+        cc.scope = node.value
+        break
+      case 'breaking-change':
+        cc.breaking = true
+        break
+      default:
+        break
+    }
+  })
+
+  if (cc.type === 'feat') {
+    await api.addLabel(cc.type, payload)
+  }
+}
+
+function isPullRequest (payload) {
+  return !!payload.pull_request
+}
+
+async function addLabel (type, payload) {
+  const octokit = getOctokit()
+  await octokit.rest.issues.addLabels({
+    owner: payload.repository.owner.login,
+    repo: payload.repository.name,
+    issue_number: payload.pull_request.number,
+    labels: ['feature']
+  })
+}
+
+let cachedOctokit
+function getOctokit () {
+  if (!cachedOctokit) {
+    const token = core.getInput('token')
+    const octokit = github.getOctokit(token)
+    cachedOctokit = octokit
+  }
+  return cachedOctokit
+}
+
+main()
+  .catch((err) => {
+    core.setFailed(err.message)
+  })
+
+
+/***/ }),
 
 /***/ 7351:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
@@ -9273,7 +9358,7 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("assert");
+module.exports = require("assert");
 
 /***/ }),
 
@@ -9281,7 +9366,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("assert");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("events");
+module.exports = require("events");
 
 /***/ }),
 
@@ -9289,7 +9374,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("events");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs");
+module.exports = require("fs");
 
 /***/ }),
 
@@ -9297,7 +9382,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("http");
+module.exports = require("http");
 
 /***/ }),
 
@@ -9305,7 +9390,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("http");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("https");
+module.exports = require("https");
 
 /***/ }),
 
@@ -9313,7 +9398,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("https");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("net");
+module.exports = require("net");
 
 /***/ }),
 
@@ -9321,7 +9406,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("net");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("os");
+module.exports = require("os");
 
 /***/ }),
 
@@ -9329,7 +9414,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("os");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("path");
+module.exports = require("path");
 
 /***/ }),
 
@@ -9337,7 +9422,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("path");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("punycode");
+module.exports = require("punycode");
 
 /***/ }),
 
@@ -9345,7 +9430,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("punycode");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("stream");
+module.exports = require("stream");
 
 /***/ }),
 
@@ -9353,7 +9438,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("stream");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("tls");
+module.exports = require("tls");
 
 /***/ }),
 
@@ -9361,7 +9446,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("tls");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("url");
+module.exports = require("url");
 
 /***/ }),
 
@@ -9369,7 +9454,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("url");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("util");
+module.exports = require("util");
 
 /***/ }),
 
@@ -9377,641 +9462,149 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("util");
 /***/ ((module) => {
 
 "use strict";
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("zlib");
+module.exports = require("zlib");
 
 /***/ })
 
-/******/ });
+/******/ 	});
 /************************************************************************/
-/******/ // The module cache
-/******/ var __webpack_module_cache__ = {};
-/******/ 
-/******/ // The require function
-/******/ function __nccwpck_require__(moduleId) {
-/******/ 	// Check if module is in cache
-/******/ 	var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 	if (cachedModule !== undefined) {
-/******/ 		return cachedModule.exports;
-/******/ 	}
-/******/ 	// Create a new module (and put it into the cache)
-/******/ 	var module = __webpack_module_cache__[moduleId] = {
-/******/ 		// no module.id needed
-/******/ 		// no module.loaded needed
-/******/ 		exports: {}
-/******/ 	};
-/******/ 
-/******/ 	// Execute the module function
-/******/ 	var threw = true;
-/******/ 	try {
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nccwpck_require__);
-/******/ 		threw = false;
-/******/ 	} finally {
-/******/ 		if(threw) delete __webpack_module_cache__[moduleId];
-/******/ 	}
-/******/ 
-/******/ 	// Return the exports of the module
-/******/ 	return module.exports;
-/******/ }
-/******/ 
-/************************************************************************/
-/******/ /* webpack/runtime/define property getters */
-/******/ (() => {
-/******/ 	// define getter functions for harmony exports
-/******/ 	__nccwpck_require__.d = (exports, definition) => {
-/******/ 		for(var key in definition) {
-/******/ 			if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
-/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 			}
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __nccwpck_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
 /******/ 		}
-/******/ 	};
-/******/ })();
-/******/ 
-/******/ /* webpack/runtime/hasOwnProperty shorthand */
-/******/ (() => {
-/******/ 	__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ })();
-/******/ 
-/******/ /* webpack/runtime/compat */
-/******/ 
-/******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
-/******/ 
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		var threw = true;
+/******/ 		try {
+/******/ 			__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nccwpck_require__);
+/******/ 			threw = false;
+/******/ 		} finally {
+/******/ 			if(threw) delete __webpack_module_cache__[moduleId];
+/******/ 		}
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__nccwpck_require__.m = __webpack_modules__;
+/******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
-"use strict";
-
-// EXPORTS
-__nccwpck_require__.d(__webpack_exports__, {
-  "h": () => (/* binding */ api)
-});
-
-// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
-var core = __nccwpck_require__(2186);
-// EXTERNAL MODULE: ./node_modules/@actions/github/lib/github.js
-var github = __nccwpck_require__(5438);
-// EXTERNAL MODULE: external "fs"
-var external_fs_ = __nccwpck_require__(5747);
-// EXTERNAL MODULE: ./node_modules/@conventional-commits/parser/index.js
-var parser = __nccwpck_require__(4523);
-;// CONCATENATED MODULE: ./node_modules/unist-util-visit/node_modules/unist-util-is/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- *
- * @typedef {string} Type
- * @typedef {Object<string, unknown>} Props
- *
- * @typedef {null|undefined|Type|Props|TestFunctionAnything|Array.<Type|Props|TestFunctionAnything>} Test
- */
-
-/**
- * Check if a node passes a test
- *
- * @callback TestFunctionAnything
- * @param {Node} node
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {boolean|void}
- */
-
-/**
- * Check if a node passes a certain node test
- *
- * @template {Node} X
- * @callback TestFunctionPredicate
- * @param {Node} node
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {node is X}
- */
-
-/**
- * @callback AssertAnything
- * @param {unknown} [node]
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {boolean}
- */
-
-/**
- * Check if a node passes a certain node test
- *
- * @template {Node} Y
- * @callback AssertPredicate
- * @param {unknown} [node]
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {node is Y}
- */
-
-const is =
-  /**
-   * Check if a node passes a test.
-   * When a `parent` node is known the `index` of node should also be given.
-   *
-   * @type {(
-   *   (<T extends Node>(node: unknown, test: T['type']|Partial<T>|TestFunctionPredicate<T>|Array.<T['type']|Partial<T>|TestFunctionPredicate<T>>, index?: number|null|undefined, parent?: Parent|null|undefined, context?: unknown) => node is T) &
-   *   ((node?: unknown, test?: Test, index?: number|null|undefined, parent?: Parent|null|undefined, context?: unknown) => boolean)
-   * )}
-   */
-  (
-    /**
-     * Check if a node passes a test.
-     * When a `parent` node is known the `index` of node should also be given.
-     *
-     * @param {unknown} [node] Node to check
-     * @param {Test} [test]
-     * When nullish, checks if `node` is a `Node`.
-     * When `string`, works like passing `function (node) {return node.type === test}`.
-     * When `function` checks if function passed the node is true.
-     * When `object`, checks that all keys in test are in node, and that they have (strictly) equal values.
-     * When `array`, checks any one of the subtests pass.
-     * @param {number|null|undefined} [index] Position of `node` in `parent`
-     * @param {Parent|null|undefined} [parent] Parent of `node`
-     * @param {unknown} [context] Context object to invoke `test` with
-     * @returns {boolean} Whether test passed and `node` is a `Node` (object with `type` set to non-empty `string`).
-     */
-    // eslint-disable-next-line max-params
-    function is(node, test, index, parent, context) {
-      const check = convert(test)
-
-      if (
-        index !== undefined &&
-        index !== null &&
-        (typeof index !== 'number' ||
-          index < 0 ||
-          index === Number.POSITIVE_INFINITY)
-      ) {
-        throw new Error('Expected positive finite index')
-      }
-
-      if (
-        parent !== undefined &&
-        parent !== null &&
-        (!is(parent) || !parent.children)
-      ) {
-        throw new Error('Expected parent node')
-      }
-
-      if (
-        (parent === undefined || parent === null) !==
-        (index === undefined || index === null)
-      ) {
-        throw new Error('Expected both parent and index')
-      }
-
-      // @ts-expect-error Looks like a node.
-      return node && node.type && typeof node.type === 'string'
-        ? Boolean(check.call(context, node, index, parent))
-        : false
-    }
-  )
-
-const convert =
-  /**
-   * @type {(
-   *   (<T extends Node>(test: T['type']|Partial<T>|TestFunctionPredicate<T>) => AssertPredicate<T>) &
-   *   ((test?: Test) => AssertAnything)
-   * )}
-   */
-  (
-    /**
-     * Generate an assertion from a check.
-     * @param {Test} [test]
-     * When nullish, checks if `node` is a `Node`.
-     * When `string`, works like passing `function (node) {return node.type === test}`.
-     * When `function` checks if function passed the node is true.
-     * When `object`, checks that all keys in test are in node, and that they have (strictly) equal values.
-     * When `array`, checks any one of the subtests pass.
-     * @returns {AssertAnything}
-     */
-    function (test) {
-      if (test === undefined || test === null) {
-        return ok
-      }
-
-      if (typeof test === 'string') {
-        return typeFactory(test)
-      }
-
-      if (typeof test === 'object') {
-        return Array.isArray(test) ? anyFactory(test) : propsFactory(test)
-      }
-
-      if (typeof test === 'function') {
-        return castFactory(test)
-      }
-
-      throw new Error('Expected function, string, or object as test')
-    }
-  )
-/**
- * @param {Array.<Type|Props|TestFunctionAnything>} tests
- * @returns {AssertAnything}
- */
-function anyFactory(tests) {
-  /** @type {Array.<AssertAnything>} */
-  const checks = []
-  let index = -1
-
-  while (++index < tests.length) {
-    checks[index] = convert(tests[index])
-  }
-
-  return castFactory(any)
-
-  /**
-   * @this {unknown}
-   * @param {unknown[]} parameters
-   * @returns {boolean}
-   */
-  function any(...parameters) {
-    let index = -1
-
-    while (++index < checks.length) {
-      if (checks[index].call(this, ...parameters)) return true
-    }
-
-    return false
-  }
-}
-
-/**
- * Utility to assert each property in `test` is represented in `node`, and each
- * values are strictly equal.
- *
- * @param {Props} check
- * @returns {AssertAnything}
- */
-function propsFactory(check) {
-  return castFactory(all)
-
-  /**
-   * @param {Node} node
-   * @returns {boolean}
-   */
-  function all(node) {
-    /** @type {string} */
-    let key
-
-    for (key in check) {
-      // @ts-expect-error: hush, it sure works as an index.
-      if (node[key] !== check[key]) return false
-    }
-
-    return true
-  }
-}
-
-/**
- * Utility to convert a string into a function which checks a given node’s type
- * for said string.
- *
- * @param {Type} check
- * @returns {AssertAnything}
- */
-function typeFactory(check) {
-  return castFactory(type)
-
-  /**
-   * @param {Node} node
-   */
-  function type(node) {
-    return node && node.type === check
-  }
-}
-
-/**
- * Utility to convert a string into a function which checks a given node’s type
- * for said string.
- * @param {TestFunctionAnything} check
- * @returns {AssertAnything}
- */
-function castFactory(check) {
-  return assertion
-
-  /**
-   * @this {unknown}
-   * @param {Array.<unknown>} parameters
-   * @returns {boolean}
-   */
-  function assertion(...parameters) {
-    // @ts-expect-error: spreading is fine.
-    return Boolean(check.call(this, ...parameters))
-  }
-}
-
-// Utility to return true.
-function ok() {
-  return true
-}
-
-;// CONCATENATED MODULE: ./node_modules/unist-util-visit/node_modules/unist-util-visit-parents/color.js
-/**
- * @param {string} d
- * @returns {string}
- */
-function color(d) {
-  return '\u001B[33m' + d + '\u001B[39m'
-}
-
-;// CONCATENATED MODULE: ./node_modules/unist-util-visit/node_modules/unist-util-visit-parents/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('./complex-types').Action} Action
- * @typedef {import('./complex-types').Index} Index
- * @typedef {import('./complex-types').ActionTuple} ActionTuple
- * @typedef {import('./complex-types').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-
-
-/**
- * Continue traversing as normal
- */
-const CONTINUE = true
-/**
- * Do not traverse this node’s children
- */
-const SKIP = 'skip'
-/**
- * Stop traversing immediately
- */
-const EXIT = false
-
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test node, optional
- * @param visitor Function to run for each node
- * @param reverse Visit the tree in reverse order, defaults to false
- */
-const visitParents =
-  /**
-   * @type {(
-   *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
-   *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
-   * )}
-   */
-  (
-    /**
-     * @param {Node} tree
-     * @param {Test} test
-     * @param {import('./complex-types').Visitor<Node>} visitor
-     * @param {boolean} [reverse]
-     */
-    function (tree, test, visitor, reverse) {
-      if (typeof test === 'function' && typeof visitor !== 'function') {
-        reverse = visitor
-        // @ts-expect-error no visitor given, so `visitor` is test.
-        visitor = test
-        test = null
-      }
-
-      const is = convert(test)
-      const step = reverse ? -1 : 1
-
-      factory(tree, null, [])()
-
-      /**
-       * @param {Node} node
-       * @param {number?} index
-       * @param {Array.<Parent>} parents
-       */
-      function factory(node, index, parents) {
-        /** @type {Object.<string, unknown>} */
-        // @ts-expect-error: hush
-        const value = typeof node === 'object' && node !== null ? node : {}
-        /** @type {string|undefined} */
-        let name
-
-        if (typeof value.type === 'string') {
-          name =
-            typeof value.tagName === 'string'
-              ? value.tagName
-              : typeof value.name === 'string'
-              ? value.name
-              : undefined
-
-          Object.defineProperty(visit, 'name', {
-            value:
-              'node (' +
-              color(value.type + (name ? '<' + name + '>' : '')) +
-              ')'
-          })
-        }
-
-        return visit
-
-        function visit() {
-          /** @type {ActionTuple} */
-          let result = []
-          /** @type {ActionTuple} */
-          let subresult
-          /** @type {number} */
-          let offset
-          /** @type {Array.<Parent>} */
-          let grandparents
-
-          if (!test || is(node, index, parents[parents.length - 1] || null)) {
-            result = toResult(visitor(node, parents))
-
-            if (result[0] === EXIT) {
-              return result
-            }
-          }
-
-          // @ts-expect-error looks like a parent.
-          if (node.children && result[0] !== SKIP) {
-            // @ts-expect-error looks like a parent.
-            offset = (reverse ? node.children.length : -1) + step
-            // @ts-expect-error looks like a parent.
-            grandparents = parents.concat(node)
-
-            // @ts-expect-error looks like a parent.
-            while (offset > -1 && offset < node.children.length) {
-              // @ts-expect-error looks like a parent.
-              subresult = factory(node.children[offset], offset, grandparents)()
-
-              if (subresult[0] === EXIT) {
-                return subresult
-              }
-
-              offset =
-                typeof subresult[1] === 'number' ? subresult[1] : offset + step
-            }
-          }
-
-          return result
-        }
-      }
-    }
-  )
-
-/**
- * @param {VisitorResult} value
- * @returns {ActionTuple}
- */
-function toResult(value) {
-  if (Array.isArray(value)) {
-    return value
-  }
-
-  if (typeof value === 'number') {
-    return [CONTINUE, value]
-  }
-
-  return [value]
-}
-
-;// CONCATENATED MODULE: ./node_modules/unist-util-visit/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-
-
-
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test, optional
- * @param visitor Function to run for each node
- * @param reverse Fisit the tree in reverse, defaults to false
- */
-const visit =
-  /**
-   * @type {(
-   *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
-   *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
-   * )}
-   */
-  (
-    /**
-     * @param {Node} tree
-     * @param {Test} test
-     * @param {import('./complex-types').Visitor} visitor
-     * @param {boolean} [reverse]
-     */
-    function (tree, test, visitor, reverse) {
-      if (typeof test === 'function' && typeof visitor !== 'function') {
-        reverse = visitor
-        visitor = test
-        test = null
-      }
-
-      visitParents(tree, test, overload, reverse)
-
-      /**
-       * @param {Node} node
-       * @param {Array.<Parent>} parents
-       */
-      function overload(node, parents) {
-        const parent = parents[parents.length - 1]
-        return visitor(
-          node,
-          parent ? parent.children.indexOf(node) : null,
-          parent
-        )
-      }
-    }
-  )
-
-;// CONCATENATED MODULE: ./index.mjs
-
-
-
-
-
-const { readFile } = external_fs_.promises
-
-const api = {
-  addLabel,
-  isPullRequest,
-  main
-}
-
-
-
-async function main () {
-  if (!process.env.GITHUB_EVENT_PATH) {
-    console.warn('no event payload found')
-    return
-  }
-  const payload = JSON.parse(
-    await readFile(process.env.GITHUB_EVENT_PATH, 'utf8')
-  )
-  if (!api.isPullRequest(payload)) {
-    console.info('skipping non pull_request')
-  }
-  const titleAst = (0,parser.parser)(payload.pull_request.title)
-  const cc = {
-    breaking: false
-  }
-  // <type>, "(", <scope>, ")", ["!"], ":", <whitespace>*, <text>
-  visit(titleAst, (node) => {
-    switch (node.type) {
-      case 'type':
-        cc.type = node.value
-        break
-      case 'scope':
-        cc.scope = node.value
-        break
-      case 'breaking-change':
-        cc.breaking = true
-        break
-      default:
-        break
-    }
-  })
-
-  if (cc.type === 'feat') {
-    await api.addLabel(cc.type, payload)
-  }
-}
-
-function isPullRequest (payload) {
-  return !!payload.pull_request
-}
-
-async function addLabel (type, payload) {
-  const octokit = getOctokit()
-  await octokit.rest.issues.addLabels({
-    owner: payload.repository.owner.login,
-    repo: payload.repository.name,
-    issue_number: payload.pull_request.number,
-    labels: ['feature']
-  })
-}
-
-let cachedOctokit
-function getOctokit () {
-  if (!cachedOctokit) {
-    const token = core.getInput('token')
-    const octokit = github.getOctokit(token)
-    cachedOctokit = octokit
-  }
-  return cachedOctokit
-}
-
-main()
-  .catch((err) => {
-    core.setFailed(err.message)
-  })
-
-})();
-
-var __webpack_exports__api = __webpack_exports__.h;
-export { __webpack_exports__api as api };
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__nccwpck_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/ensure chunk */
+/******/ 	(() => {
+/******/ 		__nccwpck_require__.f = {};
+/******/ 		// This file contains only the entry chunk.
+/******/ 		// The chunk loading function for additional chunks
+/******/ 		__nccwpck_require__.e = (chunkId) => {
+/******/ 			return Promise.all(Object.keys(__nccwpck_require__.f).reduce((promises, key) => {
+/******/ 				__nccwpck_require__.f[key](chunkId, promises);
+/******/ 				return promises;
+/******/ 			}, []));
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get javascript chunk filename */
+/******/ 	(() => {
+/******/ 		// This function allow to reference async chunks
+/******/ 		__nccwpck_require__.u = (chunkId) => {
+/******/ 			// return url for filenames based on template
+/******/ 			return "" + chunkId + ".index.js";
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__nccwpck_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat */
+/******/ 	
+/******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
+/******/ 	
+/******/ 	/* webpack/runtime/require chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded chunks
+/******/ 		// "1" means "loaded", otherwise not loaded yet
+/******/ 		var installedChunks = {
+/******/ 			179: 1
+/******/ 		};
+/******/ 		
+/******/ 		// no on chunks loaded
+/******/ 		
+/******/ 		var installChunk = (chunk) => {
+/******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids, runtime = chunk.runtime;
+/******/ 			for(var moduleId in moreModules) {
+/******/ 				if(__nccwpck_require__.o(moreModules, moduleId)) {
+/******/ 					__nccwpck_require__.m[moduleId] = moreModules[moduleId];
+/******/ 				}
+/******/ 			}
+/******/ 			if(runtime) runtime(__nccwpck_require__);
+/******/ 			for(var i = 0; i < chunkIds.length; i++)
+/******/ 				installedChunks[chunkIds[i]] = 1;
+/******/ 		
+/******/ 		};
+/******/ 		
+/******/ 		// require() chunk loading for javascript
+/******/ 		__nccwpck_require__.f.require = (chunkId, promises) => {
+/******/ 			// "1" is the signal for "already loaded"
+/******/ 			if(!installedChunks[chunkId]) {
+/******/ 				if(true) { // all chunks have JS
+/******/ 					installChunk(require("./" + __nccwpck_require__.u(chunkId)));
+/******/ 				} else installedChunks[chunkId] = 1;
+/******/ 			}
+/******/ 		};
+/******/ 		
+/******/ 		// no external install chunk
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __nccwpck_require__(2932);
+/******/ 	module.exports = __webpack_exports__;
+/******/ 	
+/******/ })()
+;

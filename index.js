@@ -1,21 +1,17 @@
-import * as core from '@actions/core'
-import * as github from '@actions/github'
-import * as fs from 'fs'
-import { parser } from '@conventional-commits/parser'
-import { visit } from 'unist-util-visit'
+const core = require('@actions/core')
+const github = require('@actions/github')
+const fs = require('fs')
 const { readFile } = fs.promises
+const { parser } = require('@conventional-commits/parser')
 
-const api = {
+const api = module.exports = {
   addLabel,
   isPullRequest,
   main
 }
 
-export {
-  api
-}
-
 async function main () {
+  const { visit } = await import('unist-util-visit')
   if (!process.env.GITHUB_EVENT_PATH) {
     console.warn('no event payload found')
     return

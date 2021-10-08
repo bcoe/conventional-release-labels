@@ -1,8 +1,8 @@
-import { describe, it, afterEach } from 'mocha'
-import { api } from '../index.mjs'
+const { describe, it, afterEach } = require('mocha')
+const api = require('../index.js')
 // import * as assert from 'assert'
 // import * as core from '@actions/core'
-import sinon from 'sinon'
+const sinon = require('sinon')
 
 const sandbox = sinon.createSandbox()
 process.env.GITHUB_EVENT_PATH = process.env.GITHUB_EVENT_PATH || ''
