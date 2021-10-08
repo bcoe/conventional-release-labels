@@ -63,7 +63,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: node
-          fork: true
           package-name: ${{env.ACTION_NAME}}
           command: release-pr
       - id: label
