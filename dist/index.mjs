@@ -9450,38 +9450,6 @@ __nccwpck_require__.d(__webpack_exports__, {
 var core = __nccwpck_require__(2186);
 // EXTERNAL MODULE: ./node_modules/@actions/github/lib/github.js
 var github = __nccwpck_require__(5438);
-// EXTERNAL MODULE: external "url"
-var external_url_ = __nccwpck_require__(8835);
-;// CONCATENATED MODULE: external "process"
-const external_process_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("process");
-// EXTERNAL MODULE: external "path"
-var external_path_ = __nccwpck_require__(5622);
-;// CONCATENATED MODULE: ./node_modules/es-main/main.js
-
-
-
-
-function stripExt(name) {
-  const extension = external_path_.extname(name);
-  if (!extension) {
-    return name;
-  }
-
-  return name.slice(0, -extension.length);
-}
-
-/* harmony default export */ function main(meta) {
-  const modulePath = (0,external_url_.fileURLToPath)(meta.url);
-
-  const scriptPath = external_process_namespaceObject.argv[1];
-  const extension = external_path_.extname(scriptPath);
-  if (extension) {
-    return modulePath === scriptPath;
-  }
-
-  return stripExt(modulePath) === scriptPath;
-}
-
 // EXTERNAL MODULE: external "fs"
 var external_fs_ = __nccwpck_require__(5747);
 // EXTERNAL MODULE: ./node_modules/@conventional-commits/parser/index.js
@@ -9967,18 +9935,17 @@ const visit =
 
 
 
-
 const { readFile } = external_fs_.promises
 
 const api = {
   addLabel,
   isPullRequest,
-  main: index_main
+  main
 }
 
 
 
-async function index_main () {
+async function main () {
   if (!process.env.GITHUB_EVENT_PATH) {
     console.warn('no event payload found')
     return
@@ -10039,12 +10006,10 @@ function getOctokit () {
   return cachedOctokit
 }
 
-if (main(({}))) {
-  index_main()
-    .catch((err) => {
-      core.setFailed(err.message)
-    })
-}
+main()
+  .catch((err) => {
+    core.setFailed(err.message)
+  })
 
 })();
 

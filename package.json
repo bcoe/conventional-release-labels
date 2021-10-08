@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.1",
   "description": "automatically apply release labels to PR, based on conventionalcommits.org",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
     "test": "c8 mocha test/*.mjs",
     "posttest": "standard",
@@ -28,7 +28,6 @@
     "@actions/core": "^1.6.0",
     "@actions/github": "^5.0.0",
     "@conventional-commits/parser": "^0.4.1",
-    "es-main": "^1.0.2",
     "unist-util-visit": "^4.1.0"
   },
   "devDependencies": {

@@ -1,6 +1,5 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import esMain from 'es-main'
 import * as fs from 'fs'
 import { parser } from '@conventional-commits/parser'
 import { visit } from 'unist-util-visit'
@@ -77,9 +76,7 @@ function getOctokit () {
   return cachedOctokit
 }
 
-if (esMain(import.meta)) {
-  main()
-    .catch((err) => {
-      core.setFailed(err.message)
-    })
-}
+main()
+  .catch((err) => {
+    core.setFailed(err.message)
+  })
