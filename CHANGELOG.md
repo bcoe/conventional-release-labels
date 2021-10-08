@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/bcoe/conventional-release-labels/compare/v1.0.3...v1.0.4) (2021-10-08)
+
+
+### Bug Fixes
+
+* **build:** GitHub actions do not support ESM ([f896644](https://www.github.com/bcoe/conventional-release-labels/commit/f896644e30c5e0c08351b6dbe9d187031119dfc2))
+
 ### [1.0.3](https://www.github.com/bcoe/conventional-release-labels/compare/v1.0.2...v1.0.3) (2021-10-08)
 
 
