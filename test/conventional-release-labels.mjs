@@ -5,7 +5,7 @@ import { api } from '../index.mjs'
 import sinon from 'sinon'
 
 const sandbox = sinon.createSandbox()
-process.env.GITHUB_EVENT_PATH = process.env.GITHUB_EVENT_PATH ?? ''
+process.env.GITHUB_EVENT_PATH = process.env.GITHUB_EVENT_PATH || ''
 
 describe('conventional-release-labels', () => {
   afterEach(() => {
