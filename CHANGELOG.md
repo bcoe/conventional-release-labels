@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/bcoe/conventional-release-labels/compare/v1.0.1...v1.0.2) (2021-10-08)
+
+
+### Bug Fixes
+
+* **build:** es-main does not work with ncc ([f44bea1](https://www.github.com/bcoe/conventional-release-labels/commit/f44bea1c09ed18dda8a3dded35d607f935c021b2))
+
 ### [1.0.1](https://www.github.com/bcoe/conventional-release-labels/compare/v1.0.0...v1.0.1) (2021-10-08)
 
 
