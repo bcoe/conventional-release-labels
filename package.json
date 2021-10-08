@@ -8,7 +8,7 @@
     "test": "c8 mocha test/*.js",
     "posttest": "standard",
     "fix": "standard --fix",
-    "build": "ncc build index.js"
+    "build": "rm -rf dist && ncc build index.js"
   },
   "repository": {
     "type": "git",
