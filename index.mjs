@@ -1,9 +1,10 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 import esMain from 'es-main'
-import { readFile } from 'fs/promises'
+import * as fs from 'fs'
 import { parser } from '@conventional-commits/parser'
 import { visit } from 'unist-util-visit'
+const { readFile } = fs.promises
 
 const api = {
   addLabel,
@@ -53,7 +54,7 @@ async function main () {
 }
 
 function isPullRequest (payload) {
-  return !!payload?.pull_request?.head
+  return !!payload.pull_request
 }
 
 async function addLabel (type, payload) {

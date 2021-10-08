@@ -10015,7 +10015,7 @@ async function index_main () {
 }
 
 function isPullRequest (payload) {
-  return !!payload?.pull_request?.head
+  return !!payload.pull_request
 }
 
 async function addLabel (type, payload) {
