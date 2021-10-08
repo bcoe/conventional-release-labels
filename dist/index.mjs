@@ -9482,8 +9482,8 @@ function stripExt(name) {
   return stripExt(modulePath) === scriptPath;
 }
 
-;// CONCATENATED MODULE: external "fs/promises"
-const promises_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs/promises");
+// EXTERNAL MODULE: external "fs"
+var external_fs_ = __nccwpck_require__(5747);
 // EXTERNAL MODULE: ./node_modules/@conventional-commits/parser/index.js
 var parser = __nccwpck_require__(4523);
 ;// CONCATENATED MODULE: ./node_modules/unist-util-visit/node_modules/unist-util-is/index.js
@@ -9968,6 +9968,7 @@ const visit =
 
 
 
+const { readFile } = external_fs_.promises
 
 const api = {
   addLabel,
@@ -9983,7 +9984,7 @@ async function index_main () {
     return
   }
   const payload = JSON.parse(
-    await (0,promises_namespaceObject.readFile)(process.env.GITHUB_EVENT_PATH, 'utf8')
+    await readFile(process.env.GITHUB_EVENT_PATH, 'utf8')
   )
   if (!api.isPullRequest(payload)) {
     console.info('skipping non pull_request')
