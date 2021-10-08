@@ -1,0 +1,12 @@
+name: 'conventional-release-labels'
+description: 'automatically apply release labels to PR, based on conventionalcommits.org'
+author: Google LLC
+inputs:
+  token:
+    description: 'GitHub token for applying labels, defaults to using secrets.GITHUB_TOKEN'
+    required: false
+    default: ${{ github.token }}
+
+runs:
+  using: 'node14'
+  main: 'dist/index.js'

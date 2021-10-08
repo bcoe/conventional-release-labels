@@ -1,0 +1,45 @@
+{
+  "name": "conventional-release-labels",
+  "private": true,
+  "version": "0.1.0",
+  "description": "automatically apply release labels to PR, based on conventionalcommits.org",
+  "main": "index.js",
+  "scripts": {
+    "test": "c8 mocha test/*.mjs",
+    "posttest": "standard",
+    "fix": "standard --fix",
+    "build": "ncc build index.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bcoe/conventional-release-labels.git"
+  },
+  "keywords": [
+    "conventional-release-labels",
+    "action"
+  ],
+  "author": "Ben Coe <bencoe@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bcoe/release-please-action/issues"
+  },
+  "homepage": "https://github.com/bcoe/release-please-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "@conventional-commits/parser": "^0.4.1",
+    "es-main": "^1.0.2",
+    "unist-util-visit": "^4.1.0"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.15.8",
+    "@vercel/ncc": "^0.31.1",
+    "c8": "^7.5.0",
+    "mocha": "^8.2.1",
+    "sinon": "^11.1.2",
+    "standard": "^16.0.4"
+  },
+  "standard": {
+    "ignore": "dist/"
+  }
+}
