@@ -32,7 +32,6 @@
     "unist-util-visit": "^4.1.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.15.8",
     "@vercel/ncc": "^0.31.1",
     "c8": "^7.5.0",
     "mocha": "^8.2.1",
