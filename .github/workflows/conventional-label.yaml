@@ -6,4 +6,4 @@ jobs:
   label:
     runs-on: ubuntu-latest
     steps:
-      - uses: bcoe/conventional-release-labels
+      - uses: bcoe/conventional-release-labels@v1
