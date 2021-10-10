@@ -78,12 +78,17 @@ async function addLabels (labels, payload) {
 
 async function removeLabel (name, payload) {
   const octokit = getOctokit()
-  await octokit.rest.issues.removeLabel({
-    owner: payload.repository.owner.login,
-    repo: payload.repository.name,
-    issue_number: payload.pull_request.number,
-    name
-  })
+  try {
+    await octokit.rest.issues.removeLabel({
+      owner: payload.repository.owner.login,
+      repo: payload.repository.name,
+      issue_number: payload.pull_request.number,
+      name
+    })
+  } catch (err) {
+    if (err.code === 404) return undefined
+    else throw err
+  }
 }
 
 let cachedOctokit
