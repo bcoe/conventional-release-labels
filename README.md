@@ -5,7 +5,7 @@
 Action that automatically adds labels to pull requests based on [Conventional Commits](https://conventionalcommits.org). These labels can be used in conjunction GitHub's
 [automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes).
 
-<img width="600" src="/screenshot.png">
+<img width="675" src="/screenshot.png">
 
 ## Setting up action
 
