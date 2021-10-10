@@ -8,7 +8,7 @@ const api = module.exports = {
   addLabels,
   isPullRequest,
   main,
-  removeLabels
+  removeLabel
 }
 
 async function main () {
@@ -55,7 +55,9 @@ async function main () {
   if (cc.breaking) labels.push(labelMap.breaking)
   if (labelMap[cc.type]) labels.push(labelMap[cc.type])
   if (labels.length) {
-    await api.removeLabels(Object.values(labelMap), payload)
+    for (const label of Object.values(labelMap)) {
+      await api.removeLabel(label, payload)
+    }
     await api.addLabels(labels, payload)
   }
 }
@@ -74,13 +76,13 @@ async function addLabels (labels, payload) {
   })
 }
 
-async function removeLabels (labels, payload) {
+async function removeLabel (name, payload) {
   const octokit = getOctokit()
-  await octokit.rest.issues.removeLabels({
+  await octokit.rest.issues.removeLabel({
     owner: payload.repository.owner.login,
     repo: payload.repository.name,
     issue_number: payload.pull_request.number,
-    labels
+    name
   })
 }
 
