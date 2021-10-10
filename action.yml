@@ -1,5 +1,5 @@
 name: 'conventional-release-labels'
-description: 'automatically apply release labels to PR, based on conventionalcommits.org'
+description: 'automatically adds labels to pull requests based on Conventional Commits. These labels can be used in conjunction GitHub's automatically generated release notes'
 author: Benjamin Coe
 inputs:
   token:
@@ -11,6 +11,10 @@ inputs:
     required: false
     default: '{"feat": "feature", "fix": "fix", "breaking": "breaking"}'
     type: string
+
+branding:
+  icon: 'align-justify'
+  color: 'yellow'
 
 runs:
   using: 'node12'
