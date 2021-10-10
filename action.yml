@@ -1,5 +1,5 @@
 name: 'conventional-release-labels'
-description: "automatically adds labels to pull requests based on Conventional Commits. These labels can be used in conjunction GitHub's automatically generated release notes"
+description: "automatically adds labels to pull requests based on Conventional Commits. Works with GitHub automated releases"
 author: Benjamin Coe
 inputs:
   token:
