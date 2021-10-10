@@ -33,6 +33,7 @@
   "devDependencies": {
     "@vercel/ncc": "^0.31.1",
     "c8": "^7.5.0",
+    "js-yaml": "^4.1.0",
     "mocha": "^8.2.1",
     "sinon": "^11.1.2",
     "standard": "^16.0.4"

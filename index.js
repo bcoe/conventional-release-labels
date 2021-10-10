@@ -5,13 +5,14 @@ const { readFile } = fs.promises
 const { parser } = require('@conventional-commits/parser')
 
 const api = module.exports = {
-  addLabel,
+  addLabels,
   isPullRequest,
   main
 }
 
 async function main () {
   const { visit } = await import('unist-util-visit')
+  const labelMap = JSON.parse(core.getInput('type_labels'))
   if (!process.env.GITHUB_EVENT_PATH) {
     console.warn('no event payload found')
     return
@@ -22,7 +23,13 @@ async function main () {
   if (!api.isPullRequest(payload)) {
     console.info('skipping non pull_request')
   }
-  const titleAst = parser(payload.pull_request.title)
+  let titleAst
+  try {
+    titleAst = parser(payload.pull_request.title)
+  } catch (err) {
+    console.warn(err.message)
+    return
+  }
   const cc = {
     breaking: false
   }
@@ -43,22 +50,23 @@ async function main () {
     }
   })
 
-  if (cc.type === 'feat') {
-    await api.addLabel(cc.type, payload)
-  }
+  const labels = []
+  if (cc.breaking) labels.push(labelMap.breaking)
+  if (labelMap[cc.type]) labels.push(labelMap[cc.type])
+  if (labels.length) await api.addLabels(labels, payload)
 }
 
 function isPullRequest (payload) {
   return !!payload.pull_request
 }
 
-async function addLabel (type, payload) {
+async function addLabels (labels, payload) {
   const octokit = getOctokit()
   await octokit.rest.issues.addLabels({
     owner: payload.repository.owner.login,
     repo: payload.repository.name,
     issue_number: payload.pull_request.number,
-    labels: ['feature']
+    labels
   })
 }
 
