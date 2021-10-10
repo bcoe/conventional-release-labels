@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/bcoe/conventional-release-labels/compare/v1.1.1...v1.1.2) (2021-10-10)
+
+
+### Bug Fixes
+
+* handle missing label ([cc51296](https://www.github.com/bcoe/conventional-release-labels/commit/cc512967206af247552bbfac6521e797c9b769ba))
+
 ### [1.1.1](https://www.github.com/bcoe/conventional-release-labels/compare/v1.1.0...v1.1.1) (2021-10-10)
 
 
