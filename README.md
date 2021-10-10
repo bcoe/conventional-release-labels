@@ -56,6 +56,12 @@ changelog:
 
 Enjoy 🎉
 
+## Related Tools
+
+| tool | description |
+|:---:|---|
+| [release-please-action](https://github.com/google-github-actions/release-please-action)   |  fully automated releases with Conventional Commits |
+
 ## License
 
 Apache Version 2.0
