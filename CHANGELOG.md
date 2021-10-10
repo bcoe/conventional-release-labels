@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/bcoe/conventional-release-labels/compare/v1.2.0...v1.2.1) (2021-10-10)
+
+
+### Bug Fixes
+
+* correct formatting in action.yml ([ce968b7](https://www.github.com/bcoe/conventional-release-labels/commit/ce968b74723c0a5bfcd78ac2deef241a5cecfb04))
+
 ## [1.2.0](https://www.github.com/bcoe/conventional-release-labels/compare/v1.1.2...v1.2.0) (2021-10-10)
 
 
