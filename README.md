@@ -2,10 +2,12 @@
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
-Automatically adds labels to pull requests based on [Conventional Commits](https://conventionalcommits.org). These labels can be used with GitHub's
+Action that automatically adds labels to pull requests based on [Conventional Commits](https://conventionalcommits.org). These labels can be used with GitHub's
 [automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes).
 
-## Configuration
+<img width="400" src="/screenshot.png">
+
+## Setting up action
 
 Create a `.github/workflows/conventional-label.yaml`:
 
@@ -45,7 +47,14 @@ changelog:
         - "*"
 ```
 
-Enjoy!
+## Configuration
+
+| input | description |
+|:---:|---|
+| `token` | A GitHub secret token, the action defaults to using the special `secrets.GITHUB_TOKEN` |
+| `type_labels` | Mapping from Conventional Commit `types` to pull request labels `{"feat": "feature", "fix": "fix", "breaking": "breaking"}` |
+
+Enjoy 🎉
 
 ## License
 
