@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/bcoe/conventional-release-labels/compare/v1.1.0...v1.1.1) (2021-10-10)
+
+
+### Bug Fixes
+
+* labels must be removed one at a time ([#14](https://www.github.com/bcoe/conventional-release-labels/issues/14)) ([5d98472](https://www.github.com/bcoe/conventional-release-labels/commit/5d98472c4416fa31d56c2b9a9c4ac587cf040529))
+
 ## [1.1.0](https://www.github.com/bcoe/conventional-release-labels/compare/v1.0.4...v1.1.0) (2021-10-10)
 
 
