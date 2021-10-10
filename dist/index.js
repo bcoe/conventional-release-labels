@@ -92,7 +92,7 @@ async function removeLabel (name, payload) {
       name
     })
   } catch (err) {
-    if (err.code === 404) return undefined
+    if (err.status === 404) return undefined
     else throw err
   }
 }
