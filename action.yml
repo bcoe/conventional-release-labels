@@ -1,11 +1,16 @@
 name: 'conventional-release-labels'
 description: 'automatically apply release labels to PR, based on conventionalcommits.org'
-author: Google LLC
+author: Benjamin Coe
 inputs:
   token:
     description: 'GitHub token for applying labels, defaults to using secrets.GITHUB_TOKEN'
     required: false
     default: ${{ github.token }}
+  type_labels:
+    description: 'what labels to apply to different conventional commit types'
+    required: false
+    default: '{"feat": "feature", "fix": "fix", "breaking": "breaking"}'
+    type: string
 
 runs:
   using: 'node12'

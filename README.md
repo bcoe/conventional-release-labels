@@ -2,7 +2,7 @@
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
-Automatically adds labels to pull requests based on [conventionalcommits.org](https://conventionalcommits.org), for the benifit of
+Automatically adds labels to pull requests based on [Conventional Commits](https://conventionalcommits.org). These labels can be used with GitHub's
 [automatically generated release notes](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes).
 
 ## Configuration
@@ -37,6 +37,9 @@ changelog:
     - title: Exciting New Features 🎉
       labels:
         - feature
+    - title: Fixes 🔧
+      labels:
+        - fix
     - title: Other Changes
       labels:
         - "*"
