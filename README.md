@@ -60,7 +60,7 @@ Enjoy 🎉
 
 | tool | description |
 |:---:|---|
-| [release-please-action](https://github.com/google-github-actions/release-please-action)   |  fully automated releases with Conventional Commits |
+| [release-please-action](https://github.com/google-github-actions/release-please-action)   |  Fully automated releases with Conventional Commits |
 
 ## License
 
