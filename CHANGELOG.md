@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/bcoe/conventional-release-labels/compare/v1.1.2...v1.2.0) (2021-10-10)
+
+
+### Features
+
+* **docs:** update action description ([#20](https://www.github.com/bcoe/conventional-release-labels/issues/20)) ([8306bff](https://www.github.com/bcoe/conventional-release-labels/commit/8306bff82003d0b7ff4ed50d07c2c043092e7f65))
+
 ### [1.1.2](https://www.github.com/bcoe/conventional-release-labels/compare/v1.1.1...v1.1.2) (2021-10-10)
 
 
