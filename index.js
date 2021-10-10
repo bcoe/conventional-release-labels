@@ -7,7 +7,8 @@ const { parser } = require('@conventional-commits/parser')
 const api = module.exports = {
   addLabels,
   isPullRequest,
-  main
+  main,
+  removeLabels
 }
 
 async function main () {
@@ -53,7 +54,10 @@ async function main () {
   const labels = []
   if (cc.breaking) labels.push(labelMap.breaking)
   if (labelMap[cc.type]) labels.push(labelMap[cc.type])
-  if (labels.length) await api.addLabels(labels, payload)
+  if (labels.length) {
+    await api.removeLabels(Object.values(labelMap), payload)
+    await api.addLabels(labels, payload)
+  }
 }
 
 function isPullRequest (payload) {
@@ -63,6 +67,16 @@ function isPullRequest (payload) {
 async function addLabels (labels, payload) {
   const octokit = getOctokit()
   await octokit.rest.issues.addLabels({
+    owner: payload.repository.owner.login,
+    repo: payload.repository.name,
+    issue_number: payload.pull_request.number,
+    labels
+  })
+}
+
+async function removeLabels (labels, payload) {
+  const octokit = getOctokit()
+  await octokit.rest.issues.removeLabels({
     owner: payload.repository.owner.login,
     repo: payload.repository.name,
     issue_number: payload.pull_request.number,

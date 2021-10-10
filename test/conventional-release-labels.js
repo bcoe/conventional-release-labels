@@ -27,14 +27,18 @@ describe('conventional-release-labels', () => {
   })
   it('it adds feature label', async () => {
     const addLabels = sandbox.stub(api, 'addLabels').resolves(undefined)
+    const removeLabels = sandbox.stub(api, 'removeLabels').resolves(undefined)
     sandbox.stub(process.env, 'GITHUB_EVENT_PATH').value('./test/fixtures/feature.json')
     await api.main()
+    sandbox.assert.calledWith(removeLabels, ['feature', 'fix', 'breaking'], sandbox.match.any)
     sandbox.assert.calledWith(addLabels, ['feature'], sandbox.match.any)
   })
   it('it adds breaking label along with type', async () => {
     const addLabels = sandbox.stub(api, 'addLabels').resolves(undefined)
+    const removeLabels = sandbox.stub(api, 'removeLabels').resolves(undefined)
     sandbox.stub(process.env, 'GITHUB_EVENT_PATH').value('./test/fixtures/breaking-fix.json')
     await api.main()
+    sandbox.assert.calledWith(removeLabels, ['feature', 'fix', 'breaking'], sandbox.match.any)
     sandbox.assert.calledWith(addLabels, ['breaking', 'fix'], sandbox.match.any)
   })
 })
