@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/bcoe/conventional-release-labels/compare/v1.2.2...v1.3.0) (2021-10-14)
+
+
+### Features
+
+* allow certain conventional commit types to be ignored ([#24](https://www.github.com/bcoe/conventional-release-labels/issues/24)) ([b5da323](https://www.github.com/bcoe/conventional-release-labels/commit/b5da3232375eda581c995454aeae2eecb591f526))
+
 ### [1.2.2](https://www.github.com/bcoe/conventional-release-labels/compare/v1.2.1...v1.2.2) (2021-10-10)
 
 
