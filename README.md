@@ -12,8 +12,10 @@ Action that automatically adds labels to pull requests based on [Conventional Co
 Create a `.github/workflows/conventional-label.yaml`:
 
 ```yaml
+# Warning, do not check out untrusted code with
+# the pull_request_target event.
 on:
-  pull_request:
+  pull_request_target:
     types: [ opened, edited ]
 name: conventional-release-labels
 jobs:
