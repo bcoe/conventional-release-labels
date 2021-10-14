@@ -51,8 +51,10 @@ changelog:
 
 | input | description |
 |:---:|---|
-| `token` | A GitHub secret token, the action defaults to using the special `secrets.GITHUB_TOKEN` |
-| `type_labels` | Mapping from Conventional Commit `types` to pull request labels `{"feat": "feature", "fix": "fix", "breaking": "breaking"}` |
+| `token` | A GitHub secret token, the action defaults to using the special, default: `secrets.GITHUB_TOKEN` |
+| `type_labels` | Mapping from Conventional Commit `types` to pull request labels, default: `{"feat": "feature", "fix": "fix", "breaking": "breaking"}` |
+| `ignored_types` | Conventional commit types that should have `ignore_label` applied, default: `["chore"]` |
+| `ignore_label` | label to apply for ignored commits, default: `ignore-for-release` |
 
 Enjoy 🎉
 

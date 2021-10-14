@@ -14,6 +14,8 @@ const api = module.exports = {
 async function main () {
   const { visit } = await import('unist-util-visit')
   const labelMap = JSON.parse(core.getInput('type_labels'))
+  const ignoreLabel = core.getInput('ignore_label')
+  const ignoredTypes = JSON.parse(core.getInput('ignored_types'))
   if (!process.env.GITHUB_EVENT_PATH) {
     console.warn('no event payload found')
     return
@@ -54,11 +56,20 @@ async function main () {
   const labels = []
   if (cc.breaking) labels.push(labelMap.breaking)
   if (labelMap[cc.type]) labels.push(labelMap[cc.type])
-  if (labels.length) {
+  if (labels.length || ignoredTypes.includes(cc.type)) {
+    // Remove all configured Conventional Commit labels:
     for (const label of Object.values(labelMap)) {
       await api.removeLabel(label, payload)
     }
-    await api.addLabels(labels, payload)
+    // Also remove the special ignore label:
+    await api.removeLabel(ignoreLabel, payload)
+    // Add special ignore label to conventional commit types like "chore:":
+    if (ignoredTypes.includes(cc.type)) {
+      await api.addLabels([ignoreLabel], payload)
+    } else {
+      // Otherwise apply label associated with type:
+      await api.addLabels(labels, payload)
+    }
   }
 }
 
