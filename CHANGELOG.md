@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/bcoe/conventional-release-labels/compare/v1.3.0...v1.3.1) (2022-07-18)
+
+
+### Bug Fixes
+
+* **deps:** address vulnerabilities, upgrading ansi-regex and minimist and node-fetch ([#31](https://github.com/bcoe/conventional-release-labels/issues/31)) ([61b86a2](https://github.com/bcoe/conventional-release-labels/commit/61b86a2a704f99ca3fcdfcba903bd2a0c5d54d53))
+
 ## [1.3.0](https://www.github.com/bcoe/conventional-release-labels/compare/v1.2.2...v1.3.0) (2021-10-14)
 
 
