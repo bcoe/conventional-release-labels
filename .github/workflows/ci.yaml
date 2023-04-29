@@ -12,6 +12,11 @@ jobs:
         node: [ 14 ]
     steps:
       - uses: actions/checkout@v2
+      - name: Check the commit style against the 'conventional commit styling'
+        uses: MichaelsJP/action-conventional-commits@master
+        with:
+          VALID_LABELS: '["feat","fix","docs","style","refactor","test","build","perf","ci","chore","revert","merge","wip","graphbreak", "apigreak"]'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         id: pnpm-install
