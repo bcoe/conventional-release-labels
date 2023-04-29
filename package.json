@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bcoe/conventional-release-labels.git"
+    "url": "git+https://github.com/MichaelsJP/conventional-release-labels.git"
   },
   "keywords": [
     "conventional-release-labels",
@@ -21,9 +21,9 @@
   "author": "Ben Coe <bencoe@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/bcoe/release-please-action/issues"
+    "url": "https://github.com/MichaelsJP/release-please-action/issues"
   },
-  "homepage": "https://github.com/bcoe/release-please-action#readme",
+  "homepage": "https://github.com/MichaelsJP/release-please-action#readme",
   "dependencies": {
     "@actions/core": "^1.6.0",
     "@actions/github": "^5.0.0",

@@ -10,10 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: pnpm/action-setup@v2
+      name: Install pnpm
+      id: pnpm-install
+      with:
+        version: 8
+        run_install: false
     - name: install
-      run: npm ci
+      run: pnpm install
     - name: build
-      run: npm run build
+      run: pnpm build
     - name: commit
       run: |-
         set -e
