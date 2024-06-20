@@ -12,11 +12,11 @@ jobs:
     - uses: actions/checkout@v4
     - name: install
       run: npm ci
-      # NOTE(Kramer): whatever build is happening does not like
-      # the new ssl library.
-    - name: setup env
-      run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
     - name: build
+      env:
+        # NOTE(Kramer): whatever build is happening does not like
+        # the new ssl library.
+        NODE_OPTIONS: '--openssl-legacy-provider'
       run: npm run build
     - name: commit
       run: |-
