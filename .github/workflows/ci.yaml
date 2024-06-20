@@ -16,9 +16,6 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: node --version
-      # NOTE(Kramer): whatever build is happening does not like
-      # the new ssl library.
-      - run: export NODE_OPTIONS=--openssl-legacy-provider
       # The first installation step ensures that all of our production
       # dependencies work on the given Node.js version, this helps us find
       # dependencies that don't match our engines field:
