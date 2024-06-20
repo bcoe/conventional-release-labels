@@ -18,17 +18,18 @@ describe('conventional-release-labels', () => {
   })
   afterEach(() => {
     sandbox.restore()
+    process.env.GITHUB_EVENT_PATH = ''
   })
   it('handles unconventional commit', async () => {
     const addLabels = sandbox.stub(api, 'addLabels').resolves(undefined)
-    sandbox.stub(process.env, 'GITHUB_EVENT_PATH').value('./test/fixtures/unconventional.json')
+    process.env.GITHUB_EVENT_PATH = './test/fixtures/unconventional.json'
     await api.main()
     sandbox.assert.notCalled(addLabels)
   })
   it('it adds feature label', async () => {
     const addLabels = sandbox.stub(api, 'addLabels').resolves(undefined)
     const removeLabel = sandbox.stub(api, 'removeLabel').resolves(undefined)
-    sandbox.stub(process.env, 'GITHUB_EVENT_PATH').value('./test/fixtures/feature.json')
+    process.env.GITHUB_EVENT_PATH = './test/fixtures/feature.json'
     await api.main()
     sandbox.assert.calledWith(removeLabel, 'feature', sandbox.match.any)
     sandbox.assert.calledWith(removeLabel, 'fix', sandbox.match.any)
@@ -39,7 +40,7 @@ describe('conventional-release-labels', () => {
   it('it adds breaking label along with type', async () => {
     const addLabels = sandbox.stub(api, 'addLabels').resolves(undefined)
     const removeLabel = sandbox.stub(api, 'removeLabel').resolves(undefined)
-    sandbox.stub(process.env, 'GITHUB_EVENT_PATH').value('./test/fixtures/breaking-fix.json')
+    process.env.GITHUB_EVENT_PATH = './test/fixtures/breaking-fix.json'
     await api.main()
     sandbox.assert.calledWith(removeLabel, 'feature', sandbox.match.any)
     sandbox.assert.calledWith(removeLabel, 'fix', sandbox.match.any)
@@ -50,7 +51,7 @@ describe('conventional-release-labels', () => {
   it('it applies ignore label to list of ignored types', async () => {
     const addLabels = sandbox.stub(api, 'addLabels').resolves(undefined)
     const removeLabel = sandbox.stub(api, 'removeLabel').resolves(undefined)
-    sandbox.stub(process.env, 'GITHUB_EVENT_PATH').value('./test/fixtures/ignored.json')
+    process.env.GITHUB_EVENT_PATH = './test/fixtures/ignored.json'
     await api.main()
     sandbox.assert.calledWith(removeLabel, 'feature', sandbox.match.any)
     sandbox.assert.calledWith(removeLabel, 'fix', sandbox.match.any)
