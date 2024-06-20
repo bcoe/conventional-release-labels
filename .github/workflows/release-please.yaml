@@ -15,7 +15,7 @@ jobs:
       # NOTE(Kramer): whatever build is happening does not like
       # the new ssl library.
     - name: setup env
-      run: export NODE_OPTIONS=--openssl-legacy-provider
+      run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
     - name: build
       run: npm run build
     - name: commit
